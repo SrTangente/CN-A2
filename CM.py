@@ -7,7 +7,12 @@ from networkx.algorithms import *
 
 n = 100
 m = 5
-net = nx.complete_graph(5)
+x = np.random.poisson(size=100)
+stubs = []
+for i in range(len(x)):
+    stubs.append([i]*x)
+
+net = nx.Graph()
 
 while nx.number_of_nodes(net) < n:
     new_node = nx.number_of_nodes(net)+1
