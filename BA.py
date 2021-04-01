@@ -6,7 +6,7 @@ from distributions import degree_distributions
 from networkx.algorithms import *
 
 # size
-n = 100
+n = 10000
 # medium degree
 m = 2
 
@@ -28,5 +28,6 @@ while nx.number_of_nodes(net) < n:
 
 if n <= 100:
     nx.draw(net)
-degree_distributions(net, apply_log=True)
-
+else:
+    degree_distributions(net, apply_log=True)
+    nx.write_pajek(net, './networks/BA_' + str(n) + '_' + str(m))

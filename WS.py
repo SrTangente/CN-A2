@@ -6,17 +6,19 @@ from distributions import degree_distributions
 from networkx.algorithms import *
 
 # size
-n = 100
+n = 10000
 # medium degree
-k = 6
+k = 4
 # rewiring probability
-p = 0.3
+p = 0.5
 
 initial_edges = []
 #initially we have a ring
-for l in range(1, k//2 + 1):
-    initial_edges = initial_edges + [(i, l+i) for i in range(n-l)]
-    initial_edges.append((n-l, 0))
+for r in range(1, k//2 + 1):
+    initial_edges = initial_edges + [(i, i+r) for i in range(n-r)]
+    initial_edges.append((n-r, 0))
+
+
 net = nx.Graph(initial_edges)
 
 for node in net.nodes:
@@ -30,6 +32,8 @@ for node in net.nodes:
         net.add_edge(node, new_dest)
 
 if n <= 100:
+    print('loooooooooooool')
     nx.draw(net)
-degree_distributions(net, apply_log=True)
 
+degree_distributions(net, apply_log=True)
+nx.write_pajek(net, './networks/BA_'+str(n)+'_'+str(k)+'_'+str(p))
