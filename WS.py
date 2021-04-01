@@ -18,7 +18,6 @@ for r in range(1, k//2 + 1):
     initial_edges = initial_edges + [(i, i+r) for i in range(n-r)]
     initial_edges.append((n-r, 0))
 
-
 net = nx.Graph(initial_edges)
 
 for node in net.nodes:
@@ -35,5 +34,5 @@ if n <= 100:
     print('loooooooooooool')
     nx.draw(net)
 
-degree_distributions(net, apply_log=True)
+degree_distributions(net, apply_log=False)
 nx.write_pajek(net, './networks/BA_'+str(n)+'_'+str(k)+'_'+str(p))
