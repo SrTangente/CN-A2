@@ -6,9 +6,9 @@ from distributions import degree_distributions
 from networkx.algorithms import *
 
 # size
-n = 10000
+n = 1000
 # medium degree
-m = 2
+m = 1
 
 net = nx.complete_graph(5)
 
@@ -26,7 +26,7 @@ while nx.number_of_nodes(net) < n:
                 net.add_edge(j+1, new_node)
                 break
 
-if n <= 100:
+if n < 100:
     nx.draw(net)
 else:
     degree_distributions(net, apply_log=True)

@@ -31,7 +31,6 @@ for node in net.nodes:
         net.add_edge(node, new_dest)
 
 if n <= 100:
-    print('loooooooooooool')
     nx.draw(net)
 
 degree_distributions(net, apply_log=False)

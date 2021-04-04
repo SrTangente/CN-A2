@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from networkx.algorithms import *
 import collections
 import numpy as np
-
+from sklearn.linear_model import LinearRegression
 
 def degree_distributions(graph, apply_log):
     G = graph
@@ -21,8 +21,8 @@ def degree_distributions(graph, apply_log):
     log_kmin = np.log10(kmin)
     log_kmax = np.log10(kmax)
 
-    print('log_kmin ', log_kmin)
-    print('log_kmax ', log_kmax)
+    #print('log_kmin ', log_kmin)
+    #print('log_kmax ', log_kmax)
 
     x_bins = np.arange(log_kmin, np.log10(kmax+1), 0.1*(np.log10(kmax+1)-log_kmin))
 
@@ -35,8 +35,8 @@ def degree_distributions(graph, apply_log):
 
     fig, ax = plt.subplots(1, 2)
 
-    print(bins)
-    print(x_bins)
+    #print(bins)
+    #print(x_bins)
     div_bins = bins / total_count
 
     # PDF
@@ -65,6 +65,15 @@ def degree_distributions(graph, apply_log):
         ax[1].set_xlabel("k")
         ax[1].bar(deg, accumulated_cnt / total_count, color="b")
 
+
+    #estimation of the exponent
+    x = x_bins
+    y = np.asarray(div_bins)
+    x = x[y!=0]
+    y = np.log(y[y!=0])
+
+    reg = LinearRegression().fit(x.reshape(-1,1),y)
+    print("Estimation exponent: "+ str(-reg.coef_+1))
     plt.show()
 
 
